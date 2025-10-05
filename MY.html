@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TravelBot</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="my.css">
+</head>
+<body class="flex flex-col min-h-screen bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900">
+  <!-- Page 1: Title Page -->
+  <div id="page1" class="page active min-h-screen flex flex-col">
+    <div class="flex-1 flex items-center justify-center">
+      <div class="text-center">
+        <h1 class="text-6xl md:text-8xl font-extrabold text-white mb-4 tracking-tight drop-shadow-lg">TravelBot</h1>
+        <p class="text-xl md:text-2xl text-white/80 font-light mb-8">Your AI Travel Companion</p>
+        <button onclick="startJourney()" class="start-btn px-8 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold text-xl shadow-lg hover:scale-105 hover:bg-indigo-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400">
+          Start
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 2: Upload Page -->
+  <div id="page2" class="page min-h-screen flex flex-col">
+    <div class="header-bar bg-gradient-to-r from-indigo-700 to-purple-700 py-4 shadow-md">
+      <div class="flex items-center justify-between max-w-4xl mx-auto px-4">
+        <button onclick="goToPage(1)" class="text-white hover:text-white/80 transition-colors rounded-full p-2 bg-white/10">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+        <h1 class="text-2xl font-bold text-white">Share Your Photo</h1>
+        <div class="w-6"></div>
+      </div>
+    </div>
+
+    <div class="flex-1 flex items-center justify-center px-2">
+      <div class="max-w-md w-full text-center bg-white/10 rounded-2xl shadow-xl p-8">
+        <h2 class="text-3xl font-semibold text-white mb-4">Upload Your Travel Photo</h2>
+        <p class="text-white/80 mb-12 text-lg">Share a photo and I'll help you discover amazing travel insights!</p>
+
+        <div class="flex justify-center space-x-8 mb-8">
+          <!-- Gallery Upload -->
+          <button onclick="handleGalleryUpload()" class="upload-btn flex flex-col items-center px-6 py-4 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400">
+            <svg class="w-16 h-16 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            <span class="font-medium text-lg">Gallery</span>
+          </button>
+
+          <!-- Camera Upload -->
+          <button onclick="handleCameraUpload()" class="upload-btn flex flex-col items-center px-6 py-4 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400">
+            <svg class="w-16 h-16 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            <span class="font-medium text-lg">Camera</span>
+          </button>
+        </div>
+
+        <input type="file" id="galleryInput" accept="image/*" style="display: none;" onchange="processUpload(this, 'gallery')">
+        <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display: none;" onchange="processUpload(this, 'camera')">
+
+        <div class="mt-8">
+          <div class="timer-box mb-2">
+            <div class="flex items-center justify-center space-x-3 text-white">
+              <div class="animate-pulse w-2 h-2 bg-white rounded-full"></div>
+              <span>Auto-continuing in <span id="skipTimer" class="font-bold">10</span>s</span>
+            </div>
+          </div>
+          <div class="mt-2 w-64 mx-auto">
+            <div class="bg-white/30 rounded-full h-2 shadow-inner">
+              <div id="progressBar2" class="progress-bar bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full h-2 transition-all duration-300"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 3: Chat Page -->
+  <div id="page3" class="page min-h-screen flex flex-col">
+    <div class="header-bar bg-gradient-to-r from-indigo-700 to-purple-700 py-4 shadow-md">
+      <div class="flex items-center justify-between max-w-4xl mx-auto px-4">
+        <button onclick="goToPage(2)" class="text-white hover:text-white/80 transition-colors rounded-full p-2 bg-white/10">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+        <h1 class="text-2xl font-bold text-white">TravelBot Chat</h1>
+        <div class="w-6"></div>
+      </div>
+    </div>
+
+    <div class="flex-1 p-2 flex justify-center items-center">
+      <div class="max-w-4xl w-full">
+        <div id="chatMessages" class="space-y-4 mb-6">
+          <div class="bot-msg bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl p-4 shadow-md">
+            <p class="text-white">Hello! I'm TravelBot. I can help you plan your trips, identify places in your photos, and give travel recommendations. How can I assist you today?</p>
+          </div>
+        </div>
+
+        <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 shadow-lg">
+          <div class="flex space-x-3">
+            <input type="text" id="chatInput" placeholder="Ask me about travel destinations..." class="chat-input flex-1 px-4 py-3 rounded-xl bg-white/80 text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-400 text-lg shadow-inner" />
+            <button onclick="sendMessage()" class="send-btn px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold shadow-lg hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="my.js"></script>
+</body>
+</html>
