@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Bot - Your Travel Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌍 Travel Bot</h1>
+            <p class="subtitle">Your Personal Travel Assistant</p>
+        </header>
+
+        <div class="chat-container">
+            <div id="chatMessages" class="chat-messages">
+                <div class="message bot-message">
+                    <div class="message-content">
+                        <p>Hello! I'm your Travel Bot assistant. How can I help you plan your trip today?</p>
+                        <p>You can ask me about:</p>
+                        <ul>
+                            <li>Travel destinations</li>
+                            <li>Hotel recommendations</li>
+                            <li>Flight information</li>
+                            <li>Travel tips</li>
+                            <li>Weather information</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-container">
+                <input 
+                    type="text" 
+                    id="userInput" 
+                    placeholder="Type your message here..." 
+                    autocomplete="off"
+                >
+                <button id="sendButton">Send</button>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Travel Bot. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
